@@ -106,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
     return Scaffold(
-      backgroundColor: Colors.indigo[800],
+      backgroundColor: Colors.indigo[800], 
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width,
             MediaQuery.of(context).size.height * 0.1),
@@ -181,72 +182,141 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Card(
-                  color: Colors.indigoAccent,
-                  margin: EdgeInsets.all(20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                              style: TextStyle(color: Colors.white),
-                              children: [
-                                TextSpan(
-                                    text: _response!.name,
-                                    style: TextStyle(fontSize: 30)),
-                                TextSpan(
-                                    text: " ${_response!.sys.country}\n\n",
-                                    style: TextStyle(fontSize: 20)),
-                                WidgetSpan(
-                                    child: Image.asset(
-                                  "wind_flag.png",
-                                  scale: 5,
-                                )),
-                                WidgetSpan(child: SizedBox(width: 5,)),
-                                WidgetSpan(
-                                    child: Transform.rotate(
-                                      angle: (_response!.wind.deg + 90) * pi/180,
-                                      child: Icon(Icons.arrow_forward_ios,color: Colors.white,size: 20),
-                                    )),
-                                TextSpan(
-                                    text:
-                                        "  ${_response!.wind.speed.toStringAsFixed(1)} m/s   ",
-                                    style: TextStyle(fontSize: 18)),
-                                TextSpan(
-                                  text: ""
-                                )
-                              ]),
+          : SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    color: Colors.indigoAccent,
+                    margin: EdgeInsets.all(20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            children: [
+                              RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                    style: TextStyle(color: Colors.white),
+                                    children: [
+                                      TextSpan(
+                                          text: _response!.name,
+                                          style: TextStyle(fontSize: 30)),
+                                      TextSpan(
+                                          text: " ${_response!.sys.country}\n\n",
+                                          style: TextStyle(fontSize: 18)),
+                                      TextSpan(
+                                        text: "${_response!.main.temp}°C\n\n",
+                                        style: TextStyle(fontSize: 30),
+                                      ),
+                                      WidgetSpan(
+                                          child: Image.asset(
+                                        "wind_flag.png",
+                                        scale: 5,
+                                      )),
+                                      WidgetSpan(child: SizedBox(width: 10,)),
+                                      WidgetSpan(
+                                          child: Transform.rotate(
+                                            angle: (_response!.wind.deg + 90) * pi/180,
+                                            child: Icon(Icons.arrow_forward_ios,color: Colors.white,size: 20),
+                                          )),
+                                      TextSpan(
+                                          text:
+                                              "  ${_response!.wind.speed.toStringAsFixed(1)} m/s\n\n\n",
+                                          style: TextStyle(fontSize: 18)),
+                                    ]),
+                              ),
+                              Wrap(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    height: 75,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Colors.blue[900]
+                                    ),
+                                    child: Center(
+                                        child: Text(_response!.main.temp_min.toStringAsFixed(1),
+                                        style: TextStyle(fontSize: 20,color: Colors.white),)
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    height: 75,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Colors.red
+                                    ),
+                                    child: Center(
+                                        child: Text(_response!.main.temp_max.toStringAsFixed(1),
+                                          style: TextStyle(fontSize: 20,color: Colors.white),)
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            image,
-                            // Icon(Icons.wb_cloudy_outlined,size: 100,),
-                            Text(
-                              _response!.weather.description,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                        Container(
+                          margin: EdgeInsets.all(20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              image,
+                              // Icon(Icons.wb_cloudy_outlined,size: 100,),
+                              Text(
+                                _response!.weather.description,
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 20),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                )
-              ],
-            ),
+                  Card(
+                    color: Colors.indigoAccent,
+                    margin: EdgeInsets.all(20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: Text("temperature feels like"),
+                          trailing: Text("${_response!.main.temp}°C"),
+                        ),
+                        ListTile(
+                          leading: Text("pressure"),
+                          trailing: Text("${_response!.main.pressure} hPa"),
+                        ),
+                        ListTile(
+                          leading: Text("Humidity"),
+                          trailing: Text("${_response!.main.humidity}%"),
+                        ),
+                        ListTile(
+                          leading: Text("Visibility"),
+                          trailing: Text("${_response!.visibility} km"),
+                        ),
+                        ListTile(
+                          leading: Text("Today sunset"),
+                          trailing: Text("${_response!.sys.sunset}"),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+          ),
     );
   }
 
