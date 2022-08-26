@@ -17,12 +17,12 @@ class WeatherResponse {
   final int visibility;
   final Wind wind;
   final Clouds clouds;
-  final double? dt;
+  final double dt;
   final SYS sys;
-  final double? timezone;
-  final double? id;
+  final double timezone;
+  final double id;
   final String name;
-  final double? cod;
+  final double cod;
 
   WeatherResponse({
     required this.coord,
@@ -66,8 +66,8 @@ class WeatherResponse {
   },
 */
 class Coord {
-  final double? lon;
-  final double? lat;
+  final double lon;
+  final double lat;
 
   Coord({required this.lon, required this.lat});
 
@@ -91,11 +91,11 @@ class Coord {
  */
 class SYS {
   final int type;
-  final double? id;
+  final double id;
   final double? message;
   final String country;
-  final double? sunrise;
-  final double? sunset;
+  final double sunrise;
+  final double sunset;
 
   SYS({
     required this.message,
@@ -140,8 +140,8 @@ class Clouds {
   },
  */
 class Wind {
-  final double? speed;
-  final double? deg;
+  final double speed;
+  final double deg;
 
   Wind({required this.deg, required this.speed});
 
@@ -161,12 +161,12 @@ class Wind {
   },
  */
 class Main {
-  final double? temp;
-  final double? feels_like;
-  final double? temp_min;
-  final double? temp_max;
-  final double? pressure;
-  final double? humidity;
+  final double temp;
+  final double feels_like;
+  final double temp_min;
+  final double temp_max;
+  final double pressure;
+  final double humidity;
 
   Main({
     required this.feels_like,

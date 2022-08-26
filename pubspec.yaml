@@ -71,7 +71,8 @@ assets:
   - assets/shower_rain.png
   - assets/snow.png
   - assets/sunny.png
-  - assets/sunny_cloudy
+  - assets/sunny_cloudy.png
+  - assets/wind_flag.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
