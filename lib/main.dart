@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:weather_a/models.dart';
 import 'data.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Weather A',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
@@ -30,37 +34,51 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final _dataService = DataService();
   WeatherResponse? _response;
   var searchC = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
-        leading: IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {
-          },
-        ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            controller: searchC,
-            decoration: InputDecoration(labelText: 'City name'),
-            textAlign: TextAlign.center,
+      backgroundColor: Colors.indigo,
+      appBar: PreferredSize(
+        preferredSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.1),
+        child: Container(
+          child: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.blueAccent),
+                child: IconButton(
+                  iconSize: 20,
+                  icon: Icon(Icons.person_sharp,color: Colors.black54),
+                  onPressed: null,
+                ),
+              ),
+              Spacer(),
+              Text('Weather A',
+              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+              ),
+              Spacer(),
+              Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.blueAccent
+                ),
+                child: IconButton(
+                  iconSize: 20,
+                  icon: Icon(Icons.search,color: Colors.black54,),
+                  onPressed: null,
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 10,),
-          ElevatedButton(onPressed: searchCity, child: Text("Search")),
-          SizedBox(height: 10,),
-          Text(_response == null? "" : "city: ${_response!.name}")
-        ],
-      ),
+        ),
+      )
     );
   }
 
