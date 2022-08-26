@@ -11,7 +11,7 @@ class DataService {
 
     final queryParameters = {
       'q': city,
-      'appid': '456aa72a6aa7dd717ad577ea7cad888a',
+      'appid': appid,
       'units' : 'metric'
     };
 
@@ -19,7 +19,7 @@ class DataService {
         'api.openweathermap.org', '/data/2.5/weather', queryParameters);
 
     final response = await http.get(uri);
-
+    print(response.body);
     return WeatherResponse.fromJson(jsonDecode(response.body));
   }
 }
